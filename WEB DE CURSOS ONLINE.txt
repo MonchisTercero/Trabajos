@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cursos">
+            <h1>Cursos en línea</h1>
+            <article class="curso">
+                <img src="img/curso1.jpg" alt="Desarrollo web">
+                <h2>Desarrollo web</h2>
+                <p>Aprende los fundamentos del desarrollo web y crea tu primera página web.</p>
+                <a href="curso1.html">Ver curso</a>
+            </article>
+            <article class="curso">
+                <img src="img/curso2.jpg" alt="Diseño gráfico">
+                <h2>Diseño gráfico</h2>
+                <p>Descubre las herramientas y técnicas necesarias para crear diseños gráficos profesionales.</p>
+                <a href="curso2.html">Ver curso</a>
+            </article>
+            <article class="curso">
+                <img src="img/curso3.jpg" alt="Marketing digital">
+                <h2>Marketing digital</h2>
+                <p>Conoce las estrategias y herramientas de marketing digital para impulsar el crecimiento de tu negocio.</p>
+                <a href="curso3.html">Ver curso</a>
+            </article>
+        </section>
