@@ -1,0 +1,46 @@
+class Inventario:
+    def __init__(self):
+        self.inventario = {}
+
+    def agregar_producto(self, id, nombre, cantidad, precio):
+        self.inventario[id] = {'nombre': nombre, 'cantidad': cantidad, 'precio': precio}
+
+    def actualizar_cantidad(self, id, nueva_cantidad):
+        if id in self.inventario:
+            self.inventario[id]['cantidad'] = nueva_cantidad
+
+    def actualizar_precio(self, id, nuevo_precio):
+        if id in self.inventario:
+            self.inventario[id]['precio'] = nuevo_precio
+
+    def eliminar_producto(self, id):
+        if id in self.inventario:
+            del self.inventario[id]
+
+    def buscar_producto(self, id):
+        if id in self.inventario:
+            return self.inventario[id]
+        else:
+            return None
+
+    def obtener_todos_los_productos(self):
+        return self.inventario
+
+class SistemaControlInventario:
+    def __init__(self):
+        self.inventario = Inventario()
+
+    def agregar_producto(self, id, nombre, cantidad, precio):
+        self.inventario.agregar_producto(id, nombre, cantidad, precio)
+
+    def actualizar_cantidad(self, id, nueva_cantidad):
+        self.inventario.actualizar_cantidad(id, nueva_cantidad)
+
+    def actualizar_precio(self, id, nuevo_precio):
+        self.inventario.actualizar_precio(id, nuevo_precio)
+
+    def eliminar_producto(self, id):
+        self.inventario.eliminar_producto(id)
+
+    def buscar_producto(self, id):
+        return self.inventario.buscar_producto(id)
