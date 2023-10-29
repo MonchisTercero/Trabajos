@@ -1,0 +1,43 @@
+import os
+
+def create_directory(directory_name):
+    try:
+        os.makedirs(directory_name)
+        print(f"Directory '{directory_name}' created successfully.")
+    except FileExistsError:
+        print(f"Directory '{directory_name}' already exists.")
+
+def delete_directory(directory_name):
+    try:
+        os.rmdir(directory_name)
+        print(f"Directory '{directory_name}' deleted successfully.")
+    except FileNotFoundError:
+        print(f"Directory '{directory_name}' does not exist.")
+
+def list_files(directory_name):
+    try:
+        files = os.listdir(directory_name)
+        print(f"Files in directory '{directory_name}':")
+        for file in files:
+            print(file)
+    except FileNotFoundError:
+        print(f"Directory '{directory_name}' does not exist.")
+
+def move_file(file_name, src_directory, dest_directory):
+    try:
+        os.rename(os.path.join(src_directory, file_name), os.path.join(dest_directory, file_name))
+        print(f"File '{file_name}' moved from '{src_directory}' to '{dest_directory}' successfully.")
+    except FileNotFoundError:
+        print(f"File '{file_name}' does not exist in '{src_directory}'.")
+
+def copy_file(file_name, src_directory, dest_directory):
+    try:
+        os.copy(os.path.join(src_directory, file_name), os.path.join(dest_directory, file_name))
+        print(f"File '{file_name}' copied from '{src_directory}' to '{dest_directory}' successfully.")
+    except FileNotFoundError:
+        print(f"File '{file_name}' does not exist in '{src_directory}'.")
+
+def rename_file(file_name, new_file_name, directory_name):
+    try:
+        os.rename(os.path.join(directory_name, file_name), os.path.join(directory_name, new_file_name))
+        print(f
