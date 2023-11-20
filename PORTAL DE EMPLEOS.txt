@@ -1,0 +1,128 @@
+HTML:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portal de empleos</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Portal de empleos</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Buscar empleo</a></li>
+            <li><a href="#">Postular a una vacante</a></li>
+            <li><a href="#">Mi perfil</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <h2>Registro de usuarios</h2>
+            <form id="registerForm">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit">Registrarse</button>
+            </form>
+        </section>
+        <section>
+            <h2>Buscar empleo por categoría</h2>
+            <form id="searchForm">
+                <label for="category">Categoría:</label>
+                <select id="category" name="category">
+                    <option value="administracion">Administración</option>
+                    <option value="desarrollo">Desarrollo</option>
+                    <option value="ventas">Ventas</option>
+                </select>
+                <br>
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css):
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+JavaScript (script.js):
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Aquí puedes enviar la información del usuario al servidor para su registro.
+    console.log('Usuario registrado:', name, email, password);
+});
+
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var category = document.getElementById('category').value;
+
+    // Aquí puedes enviar la categoría seleccionada al servidor para
