@@ -1,0 +1,63 @@
+HTML
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Registro de usuarios</title>
+ <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+ <h1>Registro de usuarios</h1>
+ <form id="registerForm">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="submit">Registrarse</button>
+ </form>
+ <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css):
+body {
+ font-family: Arial, sans-serif;
+}
+
+form {
+ width: 300px;
+ margin: 0 auto;
+}
+
+input {
+ width: 100%;
+ padding: 10px;
+ margin: 10px 0;
+}
+
+button {
+ width: 100%;
+ padding: 10px;
+ background-color: #4CAF50;
+ color: white;
+ border: none;
+ cursor: pointer;
+}
+
+button:hover {
+ background-color: #45a049;
+}
+JavaScript (script.js):
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+ event.preventDefault();
+
+ var name = document.getElementById('name').value;
+ var email = document.getElementById('email').value;
+ var password = document.getElementById('password').value;
+
+ // Aquí puedes enviar la información del usuario al servidor para su registro.
+ console.log('Usuario registrado:', name, email, password);
+});
