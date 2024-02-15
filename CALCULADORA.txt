@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendNumber(7)">7</button>
+      <button onclick="appendNumber(8)">8</button>
+      <button onclick="appendNumber(9)">9</button>
+      <button onclick="setOperator('+')">+</button>
+      <button onclick="appendNumber(4)">4</button>
+      <button onclick="appendNumber(5)">5</button>
+      <button onclick="appendNumber(6)">6</button>
+      <button onclick="setOperator('-')">-</button>
+      <button onclick="appendNumber(1)">1</button>
+      <button onclick="appendNumber(2)">2</button>
+      <button onclick="appendNumber(3)">3</button>
+      <button onclick="setOperator('*')">*</button>
+      <button onclick="appendNumber(0)">0</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="setOperator('/')">/</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+#display {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: right;
+  font-size: 18px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+button {
+  border: none;
+  background-color: #ddd;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #eee;
+}
+
+const display = document.getElementById('display');
+let firstOperand = null;
+let secondOperand = null;
+let currentOperator = null;
+
+function appendNumber(number) {
+  if (currentOperator === null) {
+    firstOperand = firstOperand !== null ? parseFloat(`${firstOperand}${number}`) : number;
+    display.value = firstOperand;
+  } else {
+    secondOperand = secondOperand !== null ? parseFloat(`${secondOperand}${number}`) : number;
+    display.value = secondOperand;
+  }
+}
+
+function setOperator(operator) {
+  if (firstOperand !== null && secondOperand !== null) {
+    calculateResult();
+  }
+  currentOperator = operator;
+}
+
+function calculateResult() {
+  if (firstOperand !== null && secondOperand !== null && currentOperator !== null) {
+    let result;
