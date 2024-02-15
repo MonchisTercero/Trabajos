@@ -1,0 +1,58 @@
+{
+  "title": "Welcome to our website",
+  "content": "This is an example of a simple static website with translations."
+}
+
+{
+  "title": "Bienvenido a nuestra página web",
+  "content": "Este es un ejemplo de un sitio web estático con traducciones."
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/i18next@21.6.5/dist/i18next.min.css">
+</head>
+<body>
+  <h1>{{ title }}</h1>
+  <p>{{ content }}</p>
+  <button id="translate-btn">Change Language</button>
+  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.5/dist/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-xhr-backend@3.2.2/dist/i18nextXHRBackend.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+const i18n = require('i18next');
+const Backend = require('i18next-xhr-backend');
+
+i18n
+  .use(Backend)
+  .init({
+    lng: 'en',
+    fallbackLng: 'en',
+    debug: false,
+    interpolation: {
+      escapeValue: false,
+    },
+    backend: {
+      loadPath: './translations/{{lng}}.json',
+    },
+  }, (err, t) => {
+    if (err) return console.error(err);
+
+    const translateBtn = document.querySelector('#translate-btn');
+    translateBtn.addEventListener('click', () => {
+      const currentLanguage = i18n.language;
+      const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
+
+      i18n.changeLanguage(newLanguage);
+    });
+
+    document.querySelector('[data-i18n]').forEach((el) => {
+      el.textContent = i18n.t(el.getAttribute('data-i18n'));
+    });
+  });
