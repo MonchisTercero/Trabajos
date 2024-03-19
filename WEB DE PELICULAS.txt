@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie List</h1>
+    <input type="text" id="search" placeholder="Search for a movie...">
+    <ul id="movieList"></ul>
+    <button id="addMovie">Add Movie</button>
+
+    <script>
+        // Sample movie data
+        const movies = [
+            { title: 'The Shawshank Redemption' },
+            { title: 'The Godfather' },
+            { title: 'The Godfather: Part II' },
+            { title: 'The Dark Knight' },
+            { title: '12 Angry Men' },
+        ];
+
+        // Display the movie list
+        const movieList = document.getElementById('movieList');
+        movies.forEach((movie) => {
+            const li = document.createElement('li');
