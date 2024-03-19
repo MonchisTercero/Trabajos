@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personnel Entry and Exit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            margin-bottom: 1em;
+        }
+
+        label {
+            display: block;
+            margin-top: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personnel Entry and Exit</h1>
+    <form>
+        <label>
+            Enter Your Name:
+            <input type="text" name="name" id="name" required>
+        </label>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="log"></div>
+
+    <script>
+        // Handle form submission
+        const log = document.getElementById('log');
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            log.innerHTML += `<p>${name} has entered.</p>`;
+            document.getElementById('name').value = '';
+        });
+
+        // Handle exit event
+        document.getElementById('log').addEventListener('click', (event) => {
+            if (event.target.tagName === 'P') {
+                event.target.remove();
+            }
+        });
+    </script>
+</body>
+</html>
