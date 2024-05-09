@@ -1,0 +1,166 @@
+<!-- login.component.html -->
+<form (ngSubmit)="onSubmit()">
+  <label>Username:</label>
+  <input type="text" [(ngModel)]="username">
+  <br>
+  <label>Password:</label>
+  <input type="password" [(ngModel)]="password">
+  <br>
+  <button type="submit">Login</button>
+</form>
+
+
+// login.component.ts
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+  username: string;
+  password: string;
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    this.authService.login(this.username, this.password).subscribe((response) => {
+      if (response.success) {
+        // redirect to product maintainer page
+        this.router.navigate(['/products']);
+      } else {
+        alert('Invalid credentials');
+      }
+    });
+  }
+}
+
+
+
+<!-- product-maintainer.component.html -->
+<h1>Product Maintainer</h1>
+<table>
+  <tr *ngFor="let product of products">
+    <td>{{ product.name }}</td>
+    <td>{{ product.description }}</td>
+    <td>
+      <button (click)="editProduct(product)">Edit</button>
+      <button (click)="deleteProduct(product)">Delete</button>
+    </td>
+  </tr>
+</table>
+<button (click)="createProduct()">Create New Product</button>
+
+<!-- create product form -->
+<div *ngIf="showCreateForm">
+  <form (ngSubmit)="onCreateProductSubmit()">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="newProduct.name">
+    <br>
+    <label>Description:</label>
+    <input type="text" [(ngModel)]="newProduct.description">
+    <br>
+    <button type="submit">Create</button>
+  </form>
+</div>
+
+<!-- edit product form -->
+<div *ngIf="showEditForm">
+  <form (ngSubmit)="onEditProductSubmit()">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="editedProduct.name">
+    <br>
+    <label>Description:</label>
+    <input type="text" [(ngModel)]="editedProduct.description">
+    <br>
+    <button type="submit">Save</button>
+  </form>
+</div>
+
+
+
+// product-maintainer.component.ts
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../product.service';
+
+@Component({
+  selector: 'app-product-maintainer',
+  templateUrl: './product-maintainer.component.html',
+  styleUrls: ['./product-maintainer.component.css']
+})
+export class ProductMaintainerComponent implements OnInit {
+  products: any[];
+  newProduct: any;
+  editedProduct: any;
+  showCreateForm: boolean;
+  showEditForm: boolean;
+
+  constructor(private productService: ProductService) { }
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe((response) => {
+      this.products = response;
+    });
+  }
+
+  createProduct(): void {
+    this.showCreateForm = true;
+  }
+
+  onCreateProductSubmit(): void {
+    this.productService.createProduct(this.newProduct).subscribe((response) => {
+      this.products.push(response);
+      this.showCreateForm = false;
+    });
+  }
+
+  editProduct(product: any): void {
+    this.editedProduct = product;
+    this.showEditForm = true;
+  }
+
+  onEditProductSubmit(): void {
+    this.productService.updateProduct(this.editedProduct).subscribe((response) => {
+      const index = this.products.indexOf(this.editedProduct);
+      this.products[index] = response;
+      this.showEditForm = false;
+    });
+  }
+
+  deleteProduct(product: any): void {
+    this.productService.deleteProduct(product.id).subscribe((response) => {
+      const index = this.products.indexOf(product);
+      this.products.splice(index, 1);
+    });
+  }
+}
+
+
+// auth.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  private apiUrl = 'https://your-backend-api.com/api';
+
+  constructor(private http: HttpClient) { }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { username, password });
+  }
+}
+
+
+
+// product.service.ts
+
+
